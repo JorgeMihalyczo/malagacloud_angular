@@ -1,0 +1,5 @@
+<div  *ngIf="perroWeb" class="d-flex justify-content-center">
+    <img alt="Foto Perro" class="img-fluid" src={{perroWeb.message}}>
+    <button (click)="damePerro()" class="btn btn-primary">Cargar Perro</button>
+    <p>{{raza}}</p>
+</div>
