@@ -11,7 +11,8 @@
     y mostramos la solucion.
 */ 
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { CdTimerComponent, TimeInterface } from 'angular-cd-timer';
 
 @Component({
   selector: 'app-adivina',
@@ -24,6 +25,9 @@ export class AdivinaComponent implements OnInit {
   numusuario:number;
   numadivina:number;
   intentos:number;
+  finPartida:boolean;
+
+  @ViewChild('basicTimer') contador!:CdTimerComponent;
 
   constructor() {
     console.log("Estoy en el constructor");
@@ -31,6 +35,7 @@ export class AdivinaComponent implements OnInit {
     this.numusuario = 0;
     this.numadivina = this.calcularNumRandomDeUnoACien();
     this.intentos = 0;
+    this.finPartida = false;
 
     console.log(`El numero a adivinar por el usuario es ${this.numadivina}`);
     //TODO: Calcular el numero a adivinar
@@ -58,6 +63,7 @@ export class AdivinaComponent implements OnInit {
 
       if (this.numusuario === this.numadivina) {
         console.log(`Acertaste al número, felicitaciones! :) `);
+        this.finPartida = true;
       } else if (this.numusuario < this.numadivina){
         console.log(`Numero incorrecto. Pista: El número secreto es mayor que ${this.numusuario}.. ;) `);
       } else if (this.numusuario > this.numadivina){
@@ -65,9 +71,15 @@ export class AdivinaComponent implements OnInit {
         }
     this.intentos++;
 
-  if (this.intentos === 5) {
-    console.log(`Superaste el número de intentos. Perdiste :( , el numero secreto era -> ${this.numadivina}` );
-  }
+    if (this.intentos === 5) {
+      console.log(`Superaste el número de intentos. Perdiste :( , el numero secreto era -> ${this.numadivina}` );
+      this.finPartida = true;
+    }
+    if (this.finPartida) {
+      this.contador.stop();//paro el contador
+      let ti:TimeInterface = this.contador.get();
+      console.log("Has tardado " + ti.minutes + " minutos y " +ti.seconds + " segundos");
+    }
   }
 
 }

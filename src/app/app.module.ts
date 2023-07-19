@@ -10,6 +10,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CadenaComponent } from './components/cadena/cadena.component';
 import { ChuckComponent } from './components/chuck/chuck.component';
+import { CdTimerModule } from 'angular-cd-timer';
+import { RestaurantesComponent } from './components/restaurantes/restaurantes.component';
+import { FormularioRestauranteComponent } from './components/formulario-restaurante/formulario-restaurante.component';
 
 @NgModule({
   declarations: [
@@ -18,13 +21,16 @@ import { ChuckComponent } from './components/chuck/chuck.component';
     DniComponent,
     PerroComponent,
     CadenaComponent,
-    ChuckComponent
+    ChuckComponent,
+    RestaurantesComponent,
+    FormularioRestauranteComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CdTimerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
