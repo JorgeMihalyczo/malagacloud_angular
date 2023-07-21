@@ -14,7 +14,7 @@ export class RestauranteService {
 
   constructor(private http:HttpClient) { }
 
-  getListaRestaurantes ():Observable<Array<Restaurante>> {
+  getListaRestaurantes():Observable<Array<Restaurante>> {
     return this.http.get<Array<Restaurante>>(RestauranteService.URL_RESTAURANTES);
   }
 
@@ -46,6 +46,11 @@ export class RestauranteService {
   getPaginaRestaurantes (page:number, size:number):Observable<any>  {
     let parametros:HttpParams = new HttpParams().set('page', page).set('size', size);
     return this.http.get<any>(RestauranteService.URL_RESTAURANTES+"/pagina", {params:parametros});
+  }
+
+  busquedaRestaurantePorClave(clave:string):Observable<Array<Restaurante>> {
+    let parametros:HttpParams = new HttpParams().set('clave', clave)
+    return this.http.get<Array<Restaurante>>(RestauranteService.URL_RESTAURANTES+"/listarPorClave", {params:parametros});
   }
 
 }

@@ -1,0 +1,9 @@
+<div class="form-group">
+    <label for="busqueda">Búsqueda de Restaurante</label>
+    <input type="search" #cajabusqueda (keyup)="busqueda1()" class="form-control" id="busqueda" name="busqueda" aria-describedby="busqueda" placeholder="Introducí nombre barrio o especialidad">  
+</div>
+<ul class="list-group" *ngIf="listaRestaurantesFiltrados">
+    <li class="list-group-item active">Lista de Restaurantes</li>
+</ul>
+<a (click)="restauranteFiltrado(rest)" class="list-group-item list-group-item-action" *ngFor="let rest of listaRestaurantesFiltrados">{{rest.nombre}} {{rest.barrio}} {{rest.especialidad1}} {{rest.especialidad2}} {{rest.especialidad3}}</a>
+<app-mapa #mapa></app-mapa>
