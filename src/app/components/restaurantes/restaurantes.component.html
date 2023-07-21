@@ -1,19 +1,20 @@
 <h1 class="rest_titulo">Lista de Restaurantes - Málaga</h1>
-<button class="btn btn-success" routerLink="/restaurante/nuevo">CREAR</button>
+<button class="btn btn-success mt-2" routerLink="/restaurante/nuevo">CREAR</button>
 <div class="container">
-<div class="row">
-  <div class="col-md-4 mb-4" *ngFor="let restaurante of lista_restaurantes">
-    <div class="card rest_card">
-      <img src="/assets/fotoRestaurante.jpg" class="card_img" alt="...">
-      <div class="card-body">
-        <img src="/assets/favicon.png" class="card_logo" alt="...">
-        <div>
-        <h1 class="card_title rest_nombre">{{ restaurante.nombre }}</h1>
-        <p class="card_text rest_direccion">{{ restaurante.direccion }}</p>
-        <p class="card_text rest_barrio">{{ restaurante.barrio }}</p>
-        <a href="#" class="btn btn-warning rest_button">Entra en el restaurante</a>
-        <button class="btn btn-danger" (click)="borrarRestaurante()">Borrar</button>
-       </div>
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let restaurante of lista_restaurantes">
+      <div class="card rest_card">
+        <img *ngIf="restaurante.fotoHashCode" src="http://localhost:8081/restaurante/obtenerFoto/{{restaurante.id}}" class="card_img" alt="...">
+      <!--si fotoHashCode es nulo, cargamos la foto por defecto-->
+      <img *ngIf="!restaurante.fotoHashCode" src="/assets/fotoRestaurante.jpg" class="card_img" alt="...">
+        <div class="card-body">
+          <div>
+          <h1 class="card_title rest_nombre">{{ restaurante.nombre }}</h1>
+          <p class="card_text rest_direccion">{{ restaurante.direccion }}</p>
+          <p class="card_text rest_barrio">{{ restaurante.barrio }}</p>
+          <a href="#" class="btn btn-warning rest_button">Entra en el restaurante</a>
+          <button class="btn btn-danger" (click)="borrarRestaurante()">Borrar</button>
+        </div>
       </div>
     </div>
   </div>

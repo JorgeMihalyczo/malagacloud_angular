@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Restaurante } from '../models/restaurante';
@@ -14,13 +14,11 @@ export class RestauranteService {
 
   constructor(private http:HttpClient) { }
 
-  getListaRestaurantes ():Observable<Array<Restaurante>>{
-
+  getListaRestaurantes ():Observable<Array<Restaurante>> {
     return this.http.get<Array<Restaurante>>(RestauranteService.URL_RESTAURANTES);
   }
 
-  postRestaurante (restaurante:Restaurante):Observable<Restaurante>
-  {
+  postRestaurante (restaurante:Restaurante):Observable<Restaurante> {
     return this.http.post<Restaurante>(RestauranteService.URL_RESTAURANTES, restaurante, {headers:this.cabeceras});
   }
 
@@ -35,7 +33,7 @@ export class RestauranteService {
         formData.append('web', restaurante.web);
         formData.append('fichaGoogle', restaurante.fichaGoogle);
         formData.append('latitud', restaurante.latitud+'');
-        formData.append('longuitud',  restaurante.longitud+'');
+        formData.append('longitud',  restaurante.longitud+'');
         formData.append('precio', restaurante.precio+'');
         formData.append('especialidad1', restaurante.especialidad1);
         formData.append('especialidad2', restaurante.especialidad2);
@@ -43,6 +41,11 @@ export class RestauranteService {
         formData.append('archivo', archivo);
     
     return this.http.post<Restaurante>(RestauranteService.URL_RESTAURANTES+"/crear-con-foto", formData);
+  }
+
+  getPaginaRestaurantes (page:number, size:number):Observable<any>  {
+    let parametros:HttpParams = new HttpParams().set('page', page).set('size', size);
+    return this.http.get<any>(RestauranteService.URL_RESTAURANTES+"/pagina", {params:parametros});
   }
 
 }

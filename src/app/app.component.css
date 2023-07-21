@@ -291,3 +291,13 @@ svg#clouds {
     visibility: hidden;
   }
 }
+
+.containerAll {
+  background-image: url("../assets/fondoApp.jpg");
+  background-position: left;
+}
+
+.containerRestaurantes {
+  background: linear-gradient(112.1deg, rgba(133, 91, 52, 0.301) 11.4%, rgba(0, 0, 0, 0.703) 70.2%);
+}
+
